@@ -1,10 +1,26 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import { ClerkLoaded, ClerkLoading, SignedIn, SignedOut, SignInButton, SignUpButton } from "@clerk/nextjs";
 import { Loader } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect } from "react";
 
 export default function Home() {
+  
+  useEffect(() => {
+    navigator.serviceWorker
+      .register("/sw.js")
+      .then((registration) =>
+        console.log(
+          "Service Worker registration successful with scope: ",
+          registration.scope,
+        ),
+      )
+      .catch((err) => console.log("Service Worker registration failed: ", err));
+  }, []);
+
   return (
    <div className="max-w-[988px] mx-auto flex-1 w-full flex flex-col lg:flex-row items-center justify-center p-4 gap-2">
      <div className="relative w-[240px] h-[240px] lg:w-[424px] lg:h-[424px] mb-8 lg:mb-0">
